@@ -6,7 +6,7 @@ pipeline {
         kind: Pod
         metadata:
           labels:
-            app: test
+            app: test2
           namespace: jenkins  
         spec:
           containers:
@@ -40,7 +40,7 @@ pipeline {
   }
   environment{
     DOCKERHUB_USERNAME = "duniaalk"
-    APP_NAME = "kaniko-webapp-demo"
+    APP_NAME = "kaniko-webapp-demo2"
     IMAGE_NAME = "${DOCKERHUB_USERNAME}" + "/" + "${APP_NAME}"
     IMAGE_TAG = "${BUILD_NUMBER}"
   }
@@ -63,7 +63,7 @@ pipeline {
     stage('Build Container Image'){
       steps {
         container('kaniko'){
-          sh "/kaniko/executor --context $WORKSPACE --destination duniaalk/kaniko-maven2:$IMAGE_TAG"
+          sh "/kaniko/executor --dockerfile `pwd`/Dockerfile \ --context `pwd` \ --destination duniaalk/kaniko-maven2:$IMAGE_TAG"
         }
       }
     }
