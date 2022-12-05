@@ -3,6 +3,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: kaniko-pod
+  namepace: jenkins
 spec:
     containers:
       - name: maven
@@ -16,7 +17,6 @@ spec:
         volumeMounts:
         - name: kaniko-secret
           mountPath: /kaniko/.docker
-    restartPolicy: Never
     volumes:
       - name: kaniko-secret
         secret:
