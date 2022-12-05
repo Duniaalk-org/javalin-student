@@ -30,26 +30,19 @@ spec:
     stage('Checkout SCM') {
       steps {
         container('git') {
-          git url: 'https://github.com/kunchalavikram1427/maven-employee-web-application.git',
+          git url: 'https://github.com/Duniaalk-org/javalin-student',
           branch: 'master'
         }
       }
-    stage('Get a Maven project') {
-      git url: 'https://github.com/scriptcamp/kubernetes-kaniko.git', branch: 'main'
-      container('maven') {
-        stage('Build a Maven project') {
-          sh '''
-          echo pwd
-          '''
-        }
-      }
     }
-
-    stage('Build Java Image') {
+       
+    stage('Build Java Image & push') {
       container('kaniko') {
         stage('Build a Go project') {
           sh '''
-            /kaniko/executor --context `pwd` --destination duniaalk/hello-kaniko:1.0
+            /kaniko/executor --dockerfile `pwd`/Dockerfile \
+                             --context `pwd` \
+                             --destination=duniaalk/hello-kaniko:1.0
           '''
         }
       }
