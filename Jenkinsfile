@@ -12,8 +12,6 @@ pipeline {
 
 stages {
        
-
-    
     stage('Checkout SCM') {
       steps {
         container('git') {
