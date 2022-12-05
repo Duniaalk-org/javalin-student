@@ -20,10 +20,12 @@ stages {
         }
       }
     }
-    stage('Code Build') {
-            steps {
-                sh "mvn clean package"
-            }
+  stage('Build SW'){
+      steps {
+        container('maven'){
+          sh 'mvn -Dmaven.test.failure.ignore=true clean package'
+        }
+      }
     }
     stage('Kaniko Java Build & Push Image') {
       steps {
