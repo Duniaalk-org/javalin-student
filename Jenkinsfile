@@ -20,27 +20,7 @@ stages {
         }
       }
     }
-  stage('Build SW'){
-      steps {
-        container('maven'){
-          sh 'mvn -Dmaven.test.failure.ignore=true clean package'
-        }
-      }
-    }
-    stage('Kaniko Java Build & Push Image') {
-      steps {
-        container('kaniko') {
-          script {
-            sh '''
-            /kaniko/executor --dockerfile `pwd`/Dockerfile \
-                             --context `pwd` \
-                             --destination=duniaalk/hello-kaniko
-            '''
-          }
-        }
-      }
-    }   
-
+ 
     
   }
 }
