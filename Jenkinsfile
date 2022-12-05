@@ -63,7 +63,7 @@ pipeline {
     stage('Build Container Image'){
       steps {
         container('kaniko'){
-          sh "/kaniko/executor --dockerfile `pwd`/Dockerfile \ --context `pwd` \ --destination duniaalk/kaniko-maven2:$IMAGE_TAG"
+          sh "/kaniko/executor --dockerfile `pwd`/Dockerfile  --context `pwd`  --destination duniaalk/kaniko-maven2:$IMAGE_TAG"
         }
       }
     }
