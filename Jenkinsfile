@@ -35,18 +35,20 @@ spec:
         }
       }
     }
-       
-    stage('Build Java Image & push') {
-      container('kaniko') {
-        stage('Build a Go project') {
-          sh '''
+    stage('Kaniko Java Build & Push Image') {
+      steps {
+        container('kaniko') {
+          script {
+            sh '''
             /kaniko/executor --dockerfile `pwd`/Dockerfile \
                              --context `pwd` \
-                             --destination=duniaalk/hello-kaniko:1.0
-          '''
+                             --destination=duniaalk/hello-kaniko
+            '''
+          }
         }
       }
-    }
+    }   
 
+    
   }
 }
