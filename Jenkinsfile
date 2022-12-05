@@ -20,6 +20,11 @@ stages {
         }
       }
     }
+    stage('Code Build') {
+            steps {
+                sh "mvn clean package"
+            }
+    }
     stage('Kaniko Java Build & Push Image') {
       steps {
         container('kaniko') {
